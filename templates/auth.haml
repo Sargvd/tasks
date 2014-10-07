@@ -1,0 +1,23 @@
+!!! html
+%html
+  %head
+    %title Please login to use tasks
+    %link{rel: 'icon', type: 'image/png', href: '/img/task.ico'}
+    %link{rel: 'stylesheet', type: 'text/css', href: '/css/auth.css'}
+    %link{rel: 'stylesheet', type: 'text/css', href: '/css/bootstrap.min.css'}
+    %script{src: '/js/jquery-1.8.3.min.js'}
+    %script{src: '/js/jquery-ui-1.9.2.custom.min.js'} //Input form shake on invalid input
+    %script{src: '/js/jquery.hotkeys.js'} //Human readable keycodes for binding events
+    %script{src: '/js/bootstrap.min.js'}
+    %script{src: '/js/auth.js'}
+    %script{src: 'https://login.persona.org/include.js'} //Persona auth support
+  %body
+    .row-fluid
+      .span6.offset3
+        .login-internal.well
+          %form.centered
+            %h2 Please sign in
+            #input-state.control-group.input-append
+              %input{id: 'login', type: 'text', placeholder: 'Email'}
+            %button.btn.btn-primary.login{type: 'submit'} Sign in
+          #alert

@@ -1,0 +1,26 @@
+:ruby
+  #Map labels for task structure to their indexes. task[tf[:is_done]] == task[3] => task 'done' status
+  tf = [:id, :task, :prio, :actions, :tags]
+  tf = Hash[tf.zip (0..tf.size).to_a]
+
+  priority_groups = {
+    :high => tasks.select {|task| task[tf[:prio]] == 'high'},
+    :medium => tasks.select {|task| task[tf[:prio]] == 'medium'},
+    :low => tasks.select {|task| task[tf[:prio]] == 'low'}
+  }
+  priority_headers = {:high => 'First to go',
+                  :medium => 'Also matters',
+                  :low => 'Can wait'}
+
+.row-fluid
+  .span7
+    %textarea.span12{id: 'tasks_add_task', type: 'text', placeholder: 'Shift+enter to add new task; Esc to clear the field; You can use #hastags or ^[123] to specify priority', height: '150px'}
+-priority_groups.each_pair do |type, tasks|
+  .row-fluid
+    %h3= priority_headers[type] unless tasks.size == 0
+  -while tasks.length > 0
+    .row-fluid
+      -for task in tasks.take 4
+        .span3{style: 'min-height: 100px; border: 1px solid rgba(0, 0, 0, .1); border-radius: 5px; margin-bottom: 40px'}
+          =Haml::Engine.new(File.open('templates/task_block.haml').read).render Object.new, :task => task, :tag_active => tag_active
+      -tasks = tasks.drop 4

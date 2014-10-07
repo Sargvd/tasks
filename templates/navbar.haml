@@ -1,0 +1,31 @@
+.container-fluid
+  .row-fluid
+    .span12
+      .navbar
+        .navbar-inner
+          .brand{style: 'margin-left: -5px'}= mail
+          .span8{style: 'height: 40px'}
+            #alert
+          .btn-group
+            -if (uri != 'user') and admin
+              %button.btn.user Users
+            -if uri != ''
+              %button.btn.task Tasks
+            %button.btn.logout
+              %i.icon-off{style: 'margin-top: 2px'}
+              Logout
+  -if mode == 'tasks_view'
+    .row-fluid{style: 'margin: 0px'}
+      .span9{style: 'margin: 0px'}
+        %ul.nav.nav-tabs{style: 'margin-bottom: 5px'}
+          -projects.each do |id, project|
+            %li{class: id == active_tab ? 'active' : ''}
+              %a.select_tab{href: '#', rel: id}
+                -if id == active_tab
+                  %i.icon-remove.close.del_project{style: 'margin-left: 3px; margin-top: 4px', rel: id}
+                  %b= project
+                -else
+                  = project
+          %i.icon-plus.pull-right.add_project{style: 'margin-top: 10px; padding: 5px;'}
+      .span3{style: 'margin: 0px'}
+        %input.pull-right.search-query{type: 'text', placeholder: 'Search by action ID'}

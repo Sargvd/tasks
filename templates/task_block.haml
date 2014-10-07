@@ -1,0 +1,52 @@
+:ruby
+  af = [:id, :body, :is_done, :tag]
+  af = Hash[af.zip (0..af.size)]
+
+  id, task, priority, actions, tags = task
+  priority_num = {:high => 1, :medium => 2, :low => 3}[priority.to_sym]
+  btn_type = {:high => 'btn-danger', :medium => 'btn-warning', :low => 'btn-info'}[priority.to_sym]
+  percent_done = actions == [] ? 0 : (actions.select {|_,_,done| done == 't'}.size).to_f / actions.size * 100
+
+%table.table.table-condensed.table-hover{style: 'margin-bottom: 2px', rel: id}
+  %tr{rel: id, style: 'background: #EEE'}
+    %td.task_body{rel: id}
+      %button.btn.btn-mini.priority{class: btn_type, rel: id}= priority_num
+      %b= task
+      -if tag_active == 'Done'
+        %i.icon-remove.close.del{rel: id, style: 'margin-left: 5px; margin-top: 3px'}
+      -else
+        %i.icon-ok.close.done{rel:id, style: 'margin-left: 5px; margin-top: 3px'}
+      %div
+        %span.label.pull-left.tag_add{style: 'margin-top: 3px; margin-right: 7px'}
+          %i.icon-tags
+          = '+'
+        -for tag in tags
+          %span.label{style: 'padding-left: 3px; margin-top: 3px'}
+            %i.icon-remove.close.del_tag{style: 'margin-left: 5px', rel: tag[0]}
+            = tag[1]
+
+  -unless actions == [] || percent_done == 0 || percent_done == 100
+    %tr
+      %td{style: 'margin: 1px'}
+        .progress.progress-striped.progress-info{style: 'margin-bottom: 1px'}
+          .bar{style: "width: #{percent_done}%"}
+  -for action in actions do
+    %tr{rel: action[af[:id]]}
+      %td.action_body{style: 'padding: 2px'}
+        -if action[af[:is_done]] == 't'
+          %span.label.label-info.pull-left{style: 'margin-right: 3px; opacity: 0.1', rel: action[af[:tag]]}= action[af[:tag]]
+          %span.body{style: 'opacity: 0.3'}= action[af[:body]]
+          %i.icon-remove-circle.close.action_del{rel: action[af[:id]]}
+          %i.icon-repeat.close.action_undone{rel: action[af[:id]]}
+        -else
+          %span.label.label-info.pull-left{style: 'margin-right: 3px; opacity: 0.1', rel: action[af[:tag]]}= action[af[:tag]]
+          %span.body= action[af[:body]]
+          %i.icon-ok-sign.close.action_done{rel: action[af[:id]]}
+  %tr
+    %td{style: 'text-align: center; padding: 2px; padding-right: 4px'}
+      %span.action_add{style: 'opacity: 0.2; cursor: pointer'}
+        %i.icon-plus
+        Add action
+  -#%tr
+  -#  %td{style: 'padding: 2px; padding-bottom:0px;'}
+  -#    %textarea.span12.add_action{type: 'text', placeholder: 'Add action', style: 'margin: 0px', rel: id}

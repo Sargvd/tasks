@@ -1,0 +1,17 @@
+.git
+.ccache
+.bash_history
+.bash_logout
+.bash_profile
+.bashrc
+.bundle
+.emacs
+.gem
+.idea
+.inputrc
+.profile
+.psql_history
+.sass-cache
+.ssh
+.vagrant_map
+.viminfo

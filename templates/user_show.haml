@@ -1,0 +1,11 @@
+%table.table.table-striped.table-hover.table-condensed.table-bordered
+  -for id, user, is_admin in @users
+    %tr
+      %td{style: 'width: 100%'}= user
+      %td
+        -if is_admin == 't'
+          %button.btn.admin.is_admin{rel: id} Demote?
+        -elsif is_admin == 'f'
+          %button.btn.admin.not_admin{rel: id} Promote?
+      %td
+        %button.button.close.del{rel: id} x

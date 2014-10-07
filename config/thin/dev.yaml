@@ -1,0 +1,8 @@
+---
+  environment: development
+  chdir: /vagrant/
+  pid: /vagrant/config/thin/tmp/thin.pid
+  rackup: /vagrant/config/thin/config.ru
+  log: /vagrant/config/thin/log/thin.log
+  daemonize: true
+  port: 4567

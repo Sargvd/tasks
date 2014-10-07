@@ -1,0 +1,12 @@
+!!! haml
+%html
+  %head
+    %title Task: please sign in
+    %link{rel: 'icon', type: 'image/png', href: '/img/task.ico'}
+    %script{src: 'http://code.jquery.com/jquery-1.8.3.min.js'}
+    %link{rel:'stylesheet', type: 'text/css', href: '/css/bootstrap.min.css'}
+  %body
+    .span10.offset3.alert.alert-error{style: 'margin-top: 20%'}
+      You are not authorized. Please
+      %a{href: '/'} sign in
+      \.

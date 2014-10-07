@@ -1,0 +1,8 @@
+.row-fluid
+  .span12
+    -for tag, count in tags
+      %span.label.tag{class: "#{'label-info' if tag == tag_active}",
+        rel: tag,
+        style: 'cursor: pointer; padding: 5px; margin-right: 5px',
+      }
+        %span.pull-left{style: 'margin-right: 3px'}= "#{tag} [#{count}]"
