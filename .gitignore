@@ -25,6 +25,9 @@
 /test/tmp/
 /test/version_tmp/
 /tmp/
+Gemfile.lock
+.ruby-version
+.ruby-gemset
 
 
 config/thin/log/thin.log
@@ -43,12 +46,6 @@ build/
 ## Environment normalisation:
 /.bundle/
 /lib/bundler/man/
-
-# for a library or gem, you might want to ignore these files since the code is
-# intended to run in multiple environments; otherwise, check them in:
-Gemfile.lock
-.ruby-version
-.ruby-gemset
 
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc

@@ -17,6 +17,7 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
+    rake (10.0.4)
     ref (1.0.5)
     sass (3.4.5)
     sinatra (1.4.5)
@@ -42,6 +43,7 @@ DEPENDENCIES
   coffee-script
   haml
   pg
+  rake
   sass
   sinatra
   sinatra-contrib

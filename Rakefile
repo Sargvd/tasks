@@ -6,7 +6,6 @@ task :restart do
   cfg = %x{hostname}.strip == 'web.dev' ? 'dev' : 'prod'
   begin
     sh "thin -C config/thin/#{cfg}.yaml -f stop"
-  rescue
   end
   sh "thin -C config/thin/#{cfg}.yaml start"
 end
