@@ -36,11 +36,20 @@ init = ->
 
   $('#navbar').delegate '.select_tab', 'click', (event) ->
     event.preventDefault()
-    console.log $(this)
     $.post "/bar/tab/#{$(this).attr 'rel'}", ->
       bar_update()
       tasks_update()
       tags_update()
+
+  #Handling renaming tabs
+  $('#navbar').delegate 'li.active', 'dblclick', (event) ->
+    event.preventDefault()
+    me = $(this)
+    tab_el = me.find 'b'
+    cur_text = tab_el.text()
+    me.empty().append(
+      "<input placeholder=#{cur_text} type='text'></input>"
+    )
 
   $('#navbar').delegate '.add_project', 'click', ->
     bootbox.prompt 'How it should be named?', (name) ->
@@ -93,14 +102,6 @@ init = ->
         tags_update()
         task_update(task_el, task_id)
       else task_update(task_el, task_id)
-
-
-  #Handling renaming tabs
-  $('#navbar').delegate '.select_tab', 'dblclick', ->
-    me = $(this)
-    tab_el = me.closest 'b'
-    console.log tab_el
-
 
   #Set event handlers and defaults for input fields
   tasks_update()

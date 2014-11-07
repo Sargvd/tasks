@@ -49,7 +49,7 @@ class MyConn
   end
   def initialize
     begin
-      config = YAML.load_file(File.join(settings.root, 'config.yaml'))
+      config = YAML.load_file(File.join(Sinatra::Application.settings.root, 'config.yaml'))
       mconfig = {}
       config.to_hash.each_pair {|k,v| mconfig[k.to_sym] = v}
       p mconfig
