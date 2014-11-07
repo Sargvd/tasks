@@ -26,6 +26,9 @@
 /test/version_tmp/
 /tmp/
 
+
+config/thin/log/thin.log
+
 ## Specific to RubyMotion:
 .dat*
 .repl_history
